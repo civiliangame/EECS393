@@ -7,6 +7,22 @@ import xlwt
 import time
 
 
+def find_product_details(link, driver):
+    driver.get(link)
+    time.sleep(2)
+
+    product_name = ""
+    product_price = 0
+    soup = BeautifulSoup(driver.page_source, "lxml")
+
+    listchecker = soup.find_all(text="Available from")
+    if len(listchecker) == 1:
+        return []
+
+
+
+
+
 driver = webdriver.Chrome(ChromeDriverManager().install())
 # Initiating the excel file
 book = xlwt.Workbook(encoding="utf-8")
@@ -88,3 +104,5 @@ print(phoneLinks)
 for link in phoneLinks:
     command = "window.open('" + link + "')"
     driver.execute_script(command)
+
+
