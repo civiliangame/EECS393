@@ -40,5 +40,18 @@ for a in li_list[1].find_all("a"):
     mobileLinks.append(a.get("href"))
 
 theMobileLink = "https://www.amazon.com" + mobileLinks[1]
-print(theMobileLink)
+#print(theMobileLink)
+
+#Go to the mobile link
 driver.get(theMobileLink)
+
+#now we want to narrow it down to smartphones
+soup = BeautifulSoup(driver.page_source, "lxml")
+smartphones = soup.find("span", text="SMARTPHONES")
+smartphoneslink = smartphones.find_parent().get("href")
+smartphoneslink = "https://www.amazon.com" + smartphoneslink
+
+driver.get(smartphoneslink)
+
+
+#Now, we will scrape this page
