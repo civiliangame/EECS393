@@ -2,14 +2,23 @@
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
-import requests
-import time
 from webdriver_manager.chrome import ChromeDriverManager
+import xlwt
+import time
+
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
-#Initialize ScrapingEssentials
-new_urls = []
+# Initiating the excel file
+book = xlwt.Workbook(encoding="utf-8")
+sheet1 = book.add_sheet("Sheet 1")
 
+
+# Adding the correct columns
+sheet1.write(0, 0, "Phone Name")
+sheet1.write(0, 1, "Amazon Price")
+sheet1.write(0, 2, "Alibaba Price")
+
+book.save("result.xls")
 #Getting all the phones for Samsung
 
 #This is the samsung specific
@@ -52,6 +61,30 @@ smartphoneslink = smartphones.find_parent().get("href")
 smartphoneslink = "https://www.amazon.com" + smartphoneslink
 
 driver.get(smartphoneslink)
+time.sleep(3)
+soup = BeautifulSoup(driver.page_source, "lxml")
 
 
-#Now, we will scrape this page
+phoneLinks = set([])
+
+for storesRow in soup.find_all("div", {"class":"a-row stores-row stores-widget-atf"}):
+    for a in storesRow.find_all("a"):
+        phoneLinks.add(a.get("href"))
+
+
+
+
+for storesRow2 in soup.find_all("div", {"class":"a-row stores-row stores-widget-btf"}):
+    #print(storesRow2)
+    for div in storesRow2.find_all("div"):
+        #print(div)
+        for a in div.find_all("a"):
+            potential = a.get("href")
+            if "Samsung" in potential and potential[0] == "/" and "twitter" "pinterest" "facebook" not in potential:
+                phoneLinks.add("https://www.amazon.com"+potential)
+
+
+print(phoneLinks)
+for link in phoneLinks:
+    command = "window.open('" + link + "')"
+    driver.execute_script(command)

@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AmazonScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+            <state relative-caret-position="502">
+              <caret line="87" selection-start-line="87" selection-end-line="87" />
               <folding>
                 <element signature="e#29#58#0" expanded="true" />
               </folding>
@@ -38,6 +38,8 @@
       <find>mobile</find>
       <find>hre</find>
       <find>href</find>
+      <find>new_urls</find>
+      <find>a-row stores-row stores-widget-btf</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -203,8 +205,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AmazonScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+        <state relative-caret-position="502">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
           <folding>
             <element signature="e#29#58#0" expanded="true" />
           </folding>
