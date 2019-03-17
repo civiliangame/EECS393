@@ -15,9 +15,18 @@ def find_product_details(link, driver):
     product_price = 0
     soup = BeautifulSoup(driver.page_source, "lxml")
 
-    listchecker = soup.find_all(text="Available from")
-    if len(listchecker) == 1:
+    productTitle = soup.find("span", {"id": "productTitle"})
+
+    try:
+        product_name = productTitle.string.replace('\n', '').replace('  ', '')
+        print(product_name)
+        product_price = soup.find("span", {"id": "priceblock_ourprice"}).string
+        print(product_price)
+
+    except Exception:
         return []
+    print ([product_name, product_price])
+    return [product_name, product_price]
 
 
 
@@ -85,7 +94,7 @@ phoneLinks = set([])
 
 for storesRow in soup.find_all("div", {"class":"a-row stores-row stores-widget-atf"}):
     for a in storesRow.find_all("a"):
-        phoneLinks.add(a.get("href"))
+        phoneLinks.add("https://www.amazon.com"+a.get("href"))
 
 
 
@@ -102,7 +111,6 @@ for storesRow2 in soup.find_all("div", {"class":"a-row stores-row stores-widget-
 
 print(phoneLinks)
 for link in phoneLinks:
-    command = "window.open('" + link + "')"
-    driver.execute_script(command)
+    find_product_details(link, driver)
 
 
