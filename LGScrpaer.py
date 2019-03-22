@@ -41,9 +41,10 @@ for i in range (len(li_list)):
     if li_list[i] == "K Series":
         print(str(i) + "   K series")
 theMobileLink = "https://www.amazon.com" + li_list[53]
-theMobileLink2 = "https://www.amazon.com" + li_list[55]
+theMobileLink2 = "https://www.amazon.com" + li_list[54]
 
 print(theMobileLink)
+print(theMobileLink2)
 
 #Go to the mobile link
 driver.get(theMobileLink)
@@ -62,4 +63,35 @@ for storesRow in soup.find_all("div", {"class":"a-row stores-row stores-widget-a
         temp = ("https://www.amazon.com"+a.get("href"))
         if temp not in phoneLinks:
             phoneLinks.append(temp)
+
+for storesRow in soup.find_all("div", {"class":"a-row stores-row stores-widget-btf"}):
+    for a in storesRow.find_all("a"):
+
+        temp = ("https://www.amazon.com"+a.get("href"))
+        print(temp)
+        if temp not in phoneLinks and "comhttps:" not in temp:
+            phoneLinks.append(temp)
+
+driver.get(theMobileLink2)
+
+time.sleep(3)
+soup = BeautifulSoup(driver.page_source, "lxml")
+
+
+for storesRow in soup.find_all("div", {"class":"a-row stores-row stores-widget-atf"}):
+    for a in storesRow.find_all("a"):
+        temp = ("https://www.amazon.com"+a.get("href"))
+        if temp not in phoneLinks:
+            phoneLinks.append(temp)
+
+for storesRow in soup.find_all("div", {"class":"a-row stores-row stores-widget-btf"}):
+    for a in storesRow.find_all("a"):
+
+        temp = ("https://www.amazon.com"+a.get("href"))
+        print(temp)
+        if temp not in phoneLinks and "comhttps:" not in temp:
+            phoneLinks.append(temp)
+
+
+
 print(phoneLinks)
