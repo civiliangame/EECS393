@@ -41,9 +41,12 @@ time.sleep(3)
 soup = BeautifulSoup(driver.page_source, "lxml")
 
 
-phoneLinks = set([])
+
+#Find the individual listings for all the phones
+phoneLinks = []
 
 for storesRow in soup.find_all("div", {"class":"a-row stores-row stores-widget-atf"}):
     for a in storesRow.find_all("a"):
-        print(a.get("href"))
-        phoneLinks.add("https://www.amazon.com"+a.get("href"))
+        temp = ("https://www.amazon.com"+a.get("href"))
+        if temp not in phoneLinks:
+            phoneLinks.append(temp)
