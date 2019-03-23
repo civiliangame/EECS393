@@ -41,6 +41,7 @@ def navigate_to_amazon(companyName, driver):
         companyLink = med.find("a").get("href")
 
     #Return it, and we now have the offical seller's page on amazon.
+    print(companyLink)
     return companyLink
 
 
@@ -55,7 +56,7 @@ def find_smartphone_category(driver):
     li_list = []
 
     #Each company calls their phones something different. This will account for it.
-    phoneNames = ["V Series", "G Series", "K Series", "W7", "SMARTPHONES", "IPHONE"]
+    phoneNames = ["V Series", "G Series", "K Series", "SMARTPHONES", "iPhone", "Smartphones"]
 
     #LG has a bunch of names for their phones, so we will make it return a list of urls for convenience.
     phoneUrls = []
@@ -86,6 +87,7 @@ def find_smartphone_category(driver):
     #Now that we have a list of urls to hit, we are done.
     #Usually, this will be only one, but LG will have 3.
     #Since we want this to be as generic as possible for good programming practices, we will return a list.
+    print(phoneUrls)
     return phoneUrls
 
 
@@ -123,6 +125,7 @@ def find_specific_phones(driver):
                 potential = "https://www.amazon.com" + a.get("href")
                 if "comhttps:" not in potential:
                     add_to_list(potential, phoneLinks)
+    print(phoneLinks)
     return phoneLinks
 
 
@@ -173,13 +176,32 @@ def main():
     #initialize company names that we will be scraping for
     company_names = ["lg", "samsung", "apple", "huawei"]
 
-    #initialize selenium webdriver. This will be what we use to crawl amazon.
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    products = []
 
+    #This will give us a list of all the specific pages of all phones made by companies in our list.
     for company in company_names:
-        navigate_to_amazon(company, driver)
-        find_smartphone_category(driver)
+        #initialize selenium webdriver. This will be what we use to crawl amazon.
+        driver = webdriver.Chrome(ChromeDriverManager().install())
+        #Find the company's listing on amazon
+        driver.get(navigate_to_amazon(company, driver))
 
+        #Find where the company lists their smartphones.
+        #For all companies except LG, this will just be a single site, with only LG having 3.
+        companyphoneurls = find_smartphone_category(driver)
+        for url in companyphoneurls:
+            driver.get(url)
+            time.sleep(1)
+            products.append(find_specific_phones(driver))
+        driver.close()
+
+
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    #Now that we have all the pages, we will go generate a spreadsheet for this stuff.
+
+    for company in products:
+        for page in company:
+            details = find_product_details(page, driver)
+            
 
 if __name__ == '__main__':
     main()
