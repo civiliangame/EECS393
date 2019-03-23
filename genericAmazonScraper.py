@@ -191,6 +191,7 @@ def main():
         for url in companyphoneurls:
             driver.get(url)
             time.sleep(1)
+
             products.append(find_specific_phones(driver))
         driver.close()
 
@@ -198,10 +199,38 @@ def main():
     driver = webdriver.Chrome(ChromeDriverManager().install())
     #Now that we have all the pages, we will go generate a spreadsheet for this stuff.
 
+
+    output = []
     for company in products:
         for page in company:
-            details = find_product_details(page, driver)
-            
+            phoneinfo = find_product_details(page, driver)
+            if len(phoneinfo) != 0:
+                output.append(phoneinfo)
+    print(output)
+
+
+    for product in output:
+        if len(product) == 0:
+            output = output.remove(product)
+    print(output)
+
+
+    #Make a excel spreadsheet
+    book = xlwt.Workbook(encoding="utf-8")
+    sheet1 = book.add_sheet("Sheet 1")
+
+    sheet1.write(0, 0, "Phone Name")
+    sheet1.write(0, 1, "Amazon Price")
+    sheet1.write(0, 2, "Alibaba Price")
+
+
+    print(len(output))
+    for i in range(0, len(output)):
+        for j in range(0, 2):
+            print("i = " + str(i) + " , j = " + str(j))
+            print(output[i][j])
+            sheet1.write(i + 1, j, output[i][j])
+    book.save("results.xls")
 
 if __name__ == '__main__':
     main()
