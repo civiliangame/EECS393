@@ -1,0 +1,9 @@
+This script will scrape all the officially listed smartphones from Samsung, LG, Apple, and Huawei on Amazon.
+After gathering data through selenium and beautifulsoup, it will save the name and price in an excel spreadsheet named "results.xls"
+
+Just run it and it will do all the work for you.
+In order to run this script, you must have the following libraries installed: Beautifulsoup, selenium, webdriver_manager.chrome, xlwt, time
+Furthermore, you must place the "chromedriver" file in the same directory as genericAmazonScraper.py and have google chrome installed. 
+
+Enjoy! 
+

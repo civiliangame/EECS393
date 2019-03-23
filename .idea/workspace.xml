@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b837da7f-4f26-41ff-b9f7-9edd979f9b1e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/genericAmazonScraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/genericAmazonScraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AmazonScraper.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AppleScraper.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HuaweiScraper.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LGScrpaer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.xls" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,71 +14,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockManager">
-    <window id="3">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/AmazonScraper.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="514">
-                    <caret line="98" column="37" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
-                    <folding>
-                      <element signature="e#29#58#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppleScraper.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HuaweiScraper.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LGScrpaer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/genericAmazonScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="213" column="43" selection-start-line="213" selection-start-column="43" selection-end-line="213" selection-end-column="43" />
+            <state relative-caret-position="198">
+              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding>
                 <element signature="e#29#58#0" expanded="true" />
               </folding>
@@ -338,9 +284,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1916" y="0" width="1368" height="772" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24981302" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24981302" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -349,7 +294,7 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="TODO" order="6" visible="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="TODO" order="6" visible="true" weight="0.3296875" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
@@ -412,8 +357,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/genericAmazonScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="213" column="43" selection-start-line="213" selection-start-column="43" selection-end-line="213" selection-end-column="43" />
+        <state relative-caret-position="198">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding>
             <element signature="e#29#58#0" expanded="true" />
           </folding>
