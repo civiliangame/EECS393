@@ -39,7 +39,7 @@ for i in range (len(li_list)):
     if li_list[i] == "V Series":
         print(str(i) + "   V series")
     if li_list[i] == "K Series":
-        print(str(i) + "   K series")
+        print(str(i) + "   G series")
 theMobileLink = "https://www.amazon.com" + li_list[53]
 theMobileLink2 = "https://www.amazon.com" + li_list[54]
 

@@ -12,6 +12,7 @@ soup = BeautifulSoup(driver.page_source, "lxml")
 
 appleLink = ""
 for med in soup.find_all("div", {"class":"med", "id": "res", "role": "main"}):
+
     #print(med)
     appleLink = med.find("a").get("href")
     #print(appleLink)
