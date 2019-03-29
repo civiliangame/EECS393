@@ -3,6 +3,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import xlwt
 import time
+import requests
 from selenium.webdriver import ActionChains
 
 #THIS METHOD IS NOT MY CODE. I FOUND IT ONLINE AND DECIDED TO INTEGRATE IT
@@ -98,13 +99,23 @@ def purgeNum(num):
     return num[0:index]
 
 def huaweiScraper():
-    driver = webdriver.Chrome(ChromeDriverManager().install())
-
-    driver.get("https://huawei.tmall.com/")
+    #driver = webdriver.Chrome(ChromeDriverManager().install())
+    r = requests.get("https://huawei.tmall.com/")
+    #driver.get("https://huawei.tmall.com/")
     time.sleep(.5)
-    soup = BeautifulSoup(driver.page_source, "lxml")
-    phonelink = soup.find(string="手机专区").find_next_siblings("li")
+    soup = BeautifulSoup(r.content, "lxml")
+    print(soup.prettify())
 
+    print("HELLO BITCHES")
+    print("")
+    mandarinphone = soup.find("a", string ="手机专区", target="_blank")
+
+    #print(phonelink)
+    phonelink = mandarinphone.find_parent()
+    print("phonelink is: "+ phonelink)
+
+    siblings = phonelink.find_siblings()
+    print("siblings are" + siblings)
     flagshiplist = []
 
     for link in phonelink.find_all("a"):
