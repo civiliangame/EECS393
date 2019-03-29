@@ -43,31 +43,121 @@ def xpath_soup(element):
     components.reverse()
     return '/%s' % '/'.join(components)
 
+def close_login_screen(driver):
+    try:
+        soup = BeautifulSoup(driver.page_source, "lxml")
+        closebutton = soup.find("div", {"class": "sufei-dialog-close", "id": "sufei-dialog-close"})
+        print(closebutton)
+        xpath = xpath_soup(closebutton)
+        print(xpath)
+        time.sleep(1)
+        driver.find_element_by_id("sufei-dialog-close").click()
+        driver.find_element_by_xpath(xpath_soup(closebutton)).click()
+        driver.find_element_by_id("sufei-dialog-close").click()
+        driver.find_element_by_id("sufei-dialog-close").click()
+        driver.find_element_by_id("sufei-dialog-close").click()
+        driver.find_element_by_id("sufei-dialog-close").click()
+        driver.find_element_by_id("sufei-dialog-close").click()
+        driver.find_element_by_id("sufei-dialog-close").click()
+
+        #print("exited")
+        time.sleep(5)
+        soup = BeautifulSoup(driver.page_source, "lxml")
+        print(soup.prettify())
+
+    except Exception:
+        print("no login required yet")
+        pass
+    return
+
+#A method that gets rid of undesirable characters in a string.
+#If a character in str is not in the string acceptables, it will take it out.
+def purgeString(str, acceptables):
+    length = len(str)
+    index = 0
+    newstr = str
+    notdeadyet = True
+    while notdeadyet == True:
+        try:
+            char = newstr[index]
+        except Exception:
+            notdeadyet = False
+            break
+        if newstr[index] not in acceptables:
+            newstr = newstr.replace(newstr[index], "")
+        else:
+            index +=1
+    return newstr
+
+#A method that will get rid of everything after a period.
+def purgeNum(num):
+    index = len(num)
+    for i in len(num):
+        if num[i] == ".":
+            index = i
+    return num[0:index]
+
+def huaweiScraper():
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+
+    driver.get("https://huawei.tmall.com/")
+    time.sleep(.5)
+    soup = BeautifulSoup(driver.page_source, "lxml")
+    phonelink = soup.find(string="手机专区").find_next_siblings("li")
+
+    flagshiplist = []
+
+    for link in phonelink.find_all("a"):
+        flagshiplist.append(link.get("href"))
+    print(flagshiplist)
 
 
-driver = webdriver.Chrome(ChromeDriverManager().install())
-driver.get("https://samsung.tmall.com/")
-time.sleep(3)
-soup = BeautifulSoup(driver.page_source, "lxml")
-
-samsungphones = soup.find("a", {"class": "jdbmc abs mcblack"})
-#print(samsungphones.get("href"))
-driver.get(samsungphones.get("href"))
-
-time.sleep(.5)
-soup = BeautifulSoup(driver.page_source, "lxml")
 
 
-phonelist = []
-for item in soup.find_all("a", {"class": "item-name"}):
+def samsungScraper():
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+
+    # driver.get("https://detail.tmall.com/item.htm?spm=a1z10.4-b-s.w4007-18945924930.7.681155f7PVwKkP&id=579791278840&sku_properties=10004:709990523")
+    # close_login_screen(driver)
+
+    driver.get("https://samsung.tmall.com/")
+    time.sleep(3)
+    soup = BeautifulSoup(driver.page_source, "lxml")
+
+    samsungphones = soup.find("a", {"class": "jdbmc abs mcblack"})
+    #print(samsungphones.get("href"))
+    driver.get(samsungphones.get("href"))
+
+    time.sleep(.5)
+    soup = BeautifulSoup(driver.page_source, "lxml")
+
+    nonnumbers = "0123456789."
+    nonchinese = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&\()*+,-./:;<=>?@[]^_`{|}~"
+    phonelist = []
     phonename = ""
     phoneprice = 0
-    #print(item)
-    phonename = item.get_text()
-    pricediv = item.find_next_sibling("div")
-    phoneprice = pricediv.get_text()
-    phonelist.append([phonename, phoneprice])
-print(phonelist)
+
+    for item in soup.find_all("a", {"class": "item-name"}):
+        phonename = item.get_text().replace("Samsung/", "")
+        pricediv = item.find_next_sibling("div")
+        phoneprice = pricediv.get_text().replace('\n', '')
+        phonename = purgeString(phonename, nonchinese)
+        phoneprice = purgeString(phoneprice, nonnumbers)
+        print(phonename)
+        print(phoneprice)
+        phonelist.append([phonename, phoneprice])
+    print(phonelist)
+    return phonelist
+
+huaweiScraper()
+
+
+
+
+
+
+
+
 # username = "eecs293philliphwang"
 # password = "philliphwang1"
 #
