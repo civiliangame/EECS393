@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b837da7f-4f26-41ff-b9f7-9edd979f9b1e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/AmazonScraper.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AppleScraper.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HuaweiScraper.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LGScrpaer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/result.xls" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/tmallscraper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/tmallscraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,14 +13,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/genericAmazonScraper.py">
+        <entry file="file://$PROJECT_DIR$/tmallscraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+            <state relative-caret-position="702">
+              <caret line="39" column="62" lean-forward="true" selection-start-line="39" selection-start-column="62" selection-end-line="39" selection-end-column="62" />
               <folding>
-                <element signature="e#29#58#0" expanded="true" />
+                <element signature="e#0#29#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,8 +46,13 @@
       <find>mobil</find>
       <find>mobile</find>
       <find>not in</find>
-      <find>print</find>
       <find>time.sleep</find>
+      <find>field username-field</find>
+      <find>login</find>
+      <find>username</find>
+      <find>clicked</find>
+      <find>eecs</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace>apple</replace>
@@ -69,29 +72,45 @@
         <option value="$PROJECT_DIR$/LGScrpaer.py" />
         <option value="$PROJECT_DIR$/AmazonScraper.py" />
         <option value="$PROJECT_DIR$/genericAmazonScraper.py" />
+        <option value="$PROJECT_DIR$/venv/tmallscraper.py" />
+        <option value="$PROJECT_DIR$/tmallscraper.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2273" />
-    <option name="width" value="964" />
+    <option name="width" value="956" />
     <option name="height" value="1044" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="EECS393" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="EECS393" type="b2602c69:ProjectViewProjectNode" />
               <item name="EECS393" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EECS393" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EECS393" type="462c0819:PsiDirectoryNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -102,6 +121,11 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/venv" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -115,7 +139,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.genericAmazonScraper">
+  <component name="RunManager" selected="Python.tmallscraper">
     <configuration name="AmazonScraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="EECS393" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,27 +153,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AmazonScraper.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="AppleScraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="EECS393" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AppleScraper.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -242,21 +245,42 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tmallscraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="EECS393" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tmallscraper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.EECS393" />
       <item itemvalue="Python.AmazonScraper" />
-      <item itemvalue="Python.AppleScraper" />
       <item itemvalue="Python.HuaweiScraper" />
       <item itemvalue="Python.LGScrpaer" />
       <item itemvalue="Python.genericAmazonScraper" />
+      <item itemvalue="Python.tmallscraper" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.tmallscraper" />
         <item itemvalue="Python.genericAmazonScraper" />
         <item itemvalue="Python.AmazonScraper" />
         <item itemvalue="Python.LGScrpaer" />
         <item itemvalue="Python.HuaweiScraper" />
-        <item itemvalue="Python.AppleScraper" />
       </list>
     </recent_temporary>
   </component>
@@ -283,18 +307,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1916" y="0" width="1368" height="772" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24981302" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17606747" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4390625" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.43886462" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" visible="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3296875" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
@@ -315,52 +340,43 @@
     <entry file="file://$PROJECT_DIR$/ScrapingEssentials.py" />
     <entry file="file://$PROJECT_DIR$/venv/AmazonProductScraper.py" />
     <entry file="file://$PROJECT_DIR$/AmazonProductScraper.py" />
-    <entry file="file://$PROJECT_DIR$/HuaweiScraper.py">
+    <entry file="file://$PROJECT_DIR$/HuaweiScraper.py" />
+    <entry file="file://$PROJECT_DIR$/AppleScraper.py" />
+    <entry file="file://$PROJECT_DIR$/LGScrpaer.py" />
+    <entry file="file://$PROJECT_DIR$/AmazonScraper.py" />
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/selenium/webdriver/remote/webelement.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppleScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LGScrpaer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AmazonScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="98" column="37" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
-          <folding>
-            <element signature="e#29#58#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="162">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/genericAmazonScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+        <state relative-caret-position="228">
+          <caret line="38" column="49" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
           <folding>
             <element signature="e#29#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/tmallscraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="57" column="48" lean-forward="true" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmallscraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="39" column="62" lean-forward="true" selection-start-line="39" selection-start-column="62" selection-end-line="39" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
