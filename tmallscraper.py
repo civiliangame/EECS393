@@ -99,28 +99,48 @@ def purgeNum(num):
     return num[0:index]
 
 def huaweiScraper():
-    #driver = webdriver.Chrome(ChromeDriverManager().install())
+
+    #We can just use requests since they don't block it
+    print("here we go")
     r = requests.get("https://huawei.tmall.com/")
+    print("loaded")
     #driver.get("https://huawei.tmall.com/")
     time.sleep(.5)
     soup = BeautifulSoup(r.content, "lxml")
-    print(soup.prettify())
+    #print(soup.prettify())
 
     print("HELLO BITCHES")
     print("")
-    mandarinphone = soup.find("a", string ="手机专区", target="_blank")
+    ft = soup.find("div", {"id": "ft"})
+    #print(ft)
 
-    #print(phonelink)
-    phonelink = mandarinphone.find_parent()
-    print("phonelink is: "+ phonelink)
+    ptlinks = []
+    for outbox in soup.find_all("div", {"class": "outbox"}):
 
-    siblings = phonelink.find_siblings()
-    print("siblings are" + siblings)
-    flagshiplist = []
+        if "navlist5" in str(outbox.find_parent()):
+            print(str(outbox.find_parent()))
+            #print("outbox = " + str(outbox))
+            for rel in outbox.find_all("div",{"class": "rel", "data-title" : "power by junezx 3.0"}):
+                for a in rel.find_all("a", {"target": "_blank", "data-linkmode" : "ptlink"}):
+                    print("link is " + a.get("href"))
 
-    for link in phonelink.find_all("a"):
-        flagshiplist.append(link.get("href"))
-    print(flagshiplist)
+    #print(ptlinks)
+
+
+    # for item in menus:
+    #     candidate = item.find("a", string="手机专区")
+    #     print(item)
+    #     if candidate != None:
+    #         phoneMenu = item
+    #         break
+    # print(phoneMenu)
+    # siblings = phoneMenu.find_siblings()
+    # print("siblings are" + str(siblings))
+    # flagshiplist = []
+    #
+    # for link in phoneMenu.find_all("a"):
+    #     flagshiplist.append(link.get("href"))
+    # print(flagshiplist)
 
 
 
