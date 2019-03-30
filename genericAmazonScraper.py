@@ -222,7 +222,7 @@ def main():
     sheet1.write(0, 0, "Phone Name")
     sheet1.write(0, 1, "Amazon Price")
     sheet1.write(0, 2, "Alibaba Price")
-
+    sheet1.write(0,3,"Company Name")
 
     print(len(output))
     for i in range(0, len(output)):

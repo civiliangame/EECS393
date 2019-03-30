@@ -13,17 +13,20 @@ import timeout_decorator
 #If it didn't load in 10 seconds, we can just try again.
 @timeout_decorator.timeout(10, use_signals=False)
 def getPage(link):
+    print("starting getPage")
     r = requests.get(link)
     time.sleep(.5)
     return r.content
 
 #A wrapper class for getPage. If it gets a timeoutError, we want to make it start again until it does.
 def neverSayDie(link):
+    print("starting neverSayDie")
     done = False;
     while not done:
         try:
             content = getPage(link)
         except Exception:
+            print("Not Dead Yet.")
             continue
         done = True
     return content
@@ -32,6 +35,7 @@ def neverSayDie(link):
 #If a character in str is not in the string acceptables, it will take it out.
 def purgeString(str, acceptables):
 
+    print("starting purgeString")
     #initializing variables
     index = 0
     newstr = str
@@ -62,6 +66,7 @@ def purgeString(str, acceptables):
 
 #A method that will get rid of everything after a period.
 def purgeNum(num):
+    print("starting purgeNum")
     index = len(num)
     for i in len(num):
         if num[i] == ".":
@@ -71,6 +76,8 @@ def purgeNum(num):
 #A method that will return all the phone name/price pairs for samsung phones
 #It will return a list of lists.
 def samsungScraper():
+    print("starting samsungScraper")
+    global samsungList
     print("here we go")
 
     #Go to the tmall listing with all the samsung products
@@ -109,10 +116,12 @@ def samsungScraper():
         phonelist.append([phonename, phoneprice])
 
     #Return the phonelist
-    return phonelist
+    samsungList = phonelist
 
 #A method that will go through the huawei site of tmall and find the links for the specific phones listed
 def huaweiScraper():
+    print("starting huaweiScraper")
+    global huaweiList
     print("here we go")
 
     #Go to the site with the requests library.
@@ -143,12 +152,14 @@ def huaweiScraper():
                     ptlinks.append("https:" + str(a.get("href")))
 
     #We now have all the links that are listed for their phones. We can return it.
-    return ptlinks
+    huaweiList = ptlinks
 
 
 
 #A method that scrapes the info for iphones of tmall
 def applescraper():
+    print("starting appleScraper")
+    global appleList
     print("here we go")
     #Go to Apple's page for tmall
     content = neverSayDie("https://apple.tmall.com/")
@@ -173,13 +184,14 @@ def applescraper():
         #Get the url from this page and add it to the list
         url = str(phonelink.get("href"))
         specific_iphones.append(url)
-    return specific_iphones
+    appleList = specific_iphones
 
 #A method that finds the urls of all phones listed on Xiaomi's tmall page.
 #It was originally going to be LG phones, but Tmall doesn't have LG phones
 #And amazon doesn't have xiaomi phones.
 def xiaomiscraper():
-
+    print("starting xiaomiscraper")
+    global xiaomiList
     #Go to the link
     print("here we go")
     content = neverSayDie("https://xiaomi.tmall.com/")
@@ -252,10 +264,12 @@ def xiaomiscraper():
                     urls.append("https:" + detailedUrl)
 
     #Now that we have a list of all urls, we can just return it.
-    return urls
+    xiaomiList = urls
 
 #A method that takes a specific listing page as input and returns the name/price as output.
-def specific_phones(link):
+def specific_phones(link, company):
+    global resultList
+    print("starting specific_phones")
     content = neverSayDie(link)
     source_code = str(content)
 
@@ -304,14 +318,57 @@ def specific_phones(link):
     phonename = (meta.get("content"))
 
     #We now have a nice pairing of phonename and phoneprice.
-    return[phonename, phoneprice]
+    resultList.append([phonename, phoneprice, company])
 
 def main():
+    t1 = threading.Thread(target=applescraper)
+    t2 = threading.Thread(target=huaweiScraper)
+    t3 = threading.Thread(target=xiaomiscraper)
+    t4 = threading.Thread(target=samsungScraper)
 
+    t1.start()
+    t2.start()
+    t3.start()
+    t4.start()
+    t1.join()
+    t2.join()
+    t3.join()
+    t4.join()
+    print("apple = " + str(appleList))
+    print("huawei = " + str(huaweiList))
+    print("xiaomi = " + str(xiaomiList))
+    print("Samsung = " + str(samsungList))
 
-    t1 = threading.Thread()
+    appleLength = len(appleList)
+    huaweiLength = len(huaweiList)
+    xiaomiLength = len(xiaomiList)
+    bigList = []
+    bigList.append(appleList)
+    bigList.append(huaweiList)
+    bigList.append(xiaomiList)
 
+    jobs = []
+    company = ""
+    for i in range(0, len(bigList)):
+        if i < appleLength:
+            company = "Apple"
+        if i < huaweiList + appleList - 1:
+            company = "Huawei"
+        else:
+            copmany = "Xiaomi"
+        thread = threading.Thread(target=specific_phones, args=(bigList[i], company))
+        jobs.append(thread)
+
+    for j in jobs:
+        j.start()
+
+    for j in jobs:
+        j.join()
+    print("Assimilation Complete")
+
+samsungList = []
 appleList = []
 huaweiList = []
 xiaomiList = []
-
+resultList = []
+main()
