@@ -271,45 +271,46 @@ def specific_phones(link):
     #print(source_code)
 
 
+def xiaomiscraper():
+    print("here we go")
+    r = requests.get("https://xiaomi.tmall.com/")
+    print("loaded")
+    soup = BeautifulSoup(r.content, "lxml")
+    print(soup)
+    topbanner = soup.find("div", {"class": "topbanner"})
+    power = topbanner.find("div", {"class": "rel", "data-title" : "power by junezx 3.0"})
+    div = power.find("div")
+    phoneKey = ""
+    urls = []
+    for a in div.find_all("a"):
+        if "565px" in a.get("style"):
+            phoneKey = a.get("data-appid")
+    for allDivs in soup.find_all("div"):
+        lock = allDivs.get("data-widget-config")
+        if lock == None:
+            continue
+        if phoneKey in lock:
+            for a in allDivs.find_all("a"):
+                detailedUrl = a.get("href")
+                if detailedUrl != None:
+                    urls.append("https:" + detailedUrl)
 
 
-links = applescraper()\
+    for a in div.find_all("a"):
+        if "639px" in a.get("style"):
+            phoneKey = a.get("data-appid")
+    for allDivs in soup.find_all("div"):
+        lock = allDivs.get("data-widget-config")
+        if lock == None:
+            continue
+        if phoneKey in lock:
+            for a in allDivs.find_all("a"):
+                detailedUrl = a.get("href")
+                if detailedUrl != None:
+                    urls.append("https:" + detailedUrl)
+    print(urls)
+    return urls
 
-print(specific_phones(links[0]))
-#specific_phones("https://detail.tmall.com/item.htm?id=581727960031&scene=taobao_shop&sku_properties=10004:900640275;5919063:6536025")
 
 
 
-# username = "eecs293philliphwang"
-# password = "philliphwang1"
-#
-# #time.sleep(5)
-# login_iframe = driver.find_element_by_id("J_loginIframe")
-# print("switched frames")
-# driver.switch_to.frame(login_iframe)
-# soup = BeautifulSoup(driver.page_source, "lxml")
-# print(soup.prettify())
-#
-#
-# if driver.find_element_by_id('J_Quick2Static').is_displayed():
-#     driver.find_element_by_id('J_Quick2Static').click()
-#     print("clicked")
-# time.sleep(2)
-# slipper = driver.find_element_by_css_selector('.nc-lang-cnt')
-# h_position = slipper.location
-# action = ActionChains(driver)
-# action.drag_and_drop_by_offset(slipper, h_position['x'] + 300, h_position['y']).perform()
-# time.sleep(3)
-#
-# driver.find_element_by_id("TPL_username_1").send_keys(username)
-# driver.find_element_by_id("TPL_password_1").send_keys(password)
-# driver.find_element_by_id("TPL_password_1").send_keys('keys.ENTER')
-# soup = BeautifulSoup(driver.page_source, "lxml")
-# print(soup.prettify())
-# #usernameField = soup.find("input", {"class" : "field username-field"})
-# #print(usernameField)
-#
-# # xpath = xpath_soup(usernameField)
-# # print(xpath)
-# # driver.find_element_by_xpath(xpath).send_keys(username)
-#
