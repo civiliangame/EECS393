@@ -25,8 +25,8 @@ def neverSayDie(link):
     while not done:
         try:
             content = getPage(link)
-        except Exception:
-            print("Not Dead Yet.")
+        except Exception as e:
+            print(e)
             continue
         done = True
     print("loaded")
@@ -322,31 +322,65 @@ def specific_phones(link, company):
     resultList.append([phonename, phoneprice, company])
 
 def main():
-    t1 = threading.Thread(target=applescraper)
-    t2 = threading.Thread(target=huaweiScraper)
-    t3 = threading.Thread(target=xiaomiscraper)
-    t4 = threading.Thread(target=samsungScraper)
-
-    t1.start()
-    t2.start()
-    t3.start()
-    t4.start()
-    t1.join()
-    t2.join()
-    t3.join()
-    t4.join()
-    print("apple = " + str(appleList))
-    print("huawei = " + str(huaweiList))
-    print("xiaomi = " + str(xiaomiList))
-    print("Samsung = " + str(samsungList))
-
+    # t1 = threading.Thread(target=applescraper)
+    # t2 = threading.Thread(target=huaweiScraper)
+    # t3 = threading.Thread(target=xiaomiscraper)
+    # t4 = threading.Thread(target=samsungScraper)
+    #
+    # t1.start()
+    # t2.start()
+    # t3.start()
+    # t4.start()
+    # t1.join()
+    # t2.join()
+    # t3.join()
+    # t4.join()
+    # print("apple = " + str(appleList))
+    # print("huawei = " + str(huaweiList))
+    # print("xiaomi = " + str(xiaomiList))
+    # print("Samsung = " + str(samsungList))
+    apple = ['https://detail.tmall.com/item.htm?id=579791278840', 'https://detail.tmall.com/item.htm?id=577249277344',
+             'https://detail.tmall.com/item.htm?id=558420556696&scene=taobao_shop']
+    huawei = ['https://detail.tmall.com/item.htm?id=581727960031&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=567332753408&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=575984231019&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=579196707747&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=583857290585&scene=taobao_shop']
+    xiaomi = ['https://detail.tmall.com/item.htm?id=579914211622&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=570133905140&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=566510433862&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=567679236534&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=572473824056&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=573627357978&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=577610489452&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=577345730738&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=584384110633&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=589192455077&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=586768982581&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=570279488000&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=569705565098&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=584654464963&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=588763869289&scene=taobao_shop',
+              'https://detail.tmall.com/item.htm?id=589049441294&scene=taobao_shop']
+    Samsung = [['GalaxyS10+SM-G9750855IP684G', '6999.00'], ['GalaxyS10SM-G9730855IP684G', '5999.00'],
+               ['GalaxyS10eSM-G9700855IP684G', '4999.00'], ['300GALAXYNote9SM-N96006+128GB/8+512GBSpen4G', '6599.00'],
+               ['300GALAXYNote9SM-N96008+512GBSpen4G', '8599.00'], ['300GalaxyS9+SM-G9650/DS845IP684G', '5499.00'],
+               ['300GalaxyS9SM-G9600/DS845IP684G', '4799.00'], ['GALAXYS8SM-G95004+64GB4G', '2999.003299.00'],
+               ['GalaxyS8+SM-G95506+128GB4G', '3799.003999.00']]
+    appleList = apple
+    huaweiList = huawei
+    xiaomiList = xiaomi
     appleLength = len(appleList)
     huaweiLength = len(huaweiList)
     xiaomiLength = len(xiaomiList)
     bigList = []
-    bigList.append(appleList)
-    bigList.append(huaweiList)
-    bigList.append(xiaomiList)
+
+    for a in appleList:
+        bigList.append(a)
+    for h in huaweiList:
+        bigList.append(h)
+    for x in xiaomiList:
+        bigList.append(x)
 
     jobs = []
     company = ""
@@ -373,3 +407,9 @@ huaweiList = []
 xiaomiList = []
 resultList = []
 main()
+
+
+# apple = ['https://detail.tmall.com/item.htm?id=579791278840', 'https://detail.tmall.com/item.htm?id=577249277344', 'https://detail.tmall.com/item.htm?id=558420556696&scene=taobao_shop']
+# huawei = ['https://detail.tmall.com/item.htm?id=581727960031&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=567332753408&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=575984231019&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=579196707747&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=583857290585&scene=taobao_shop']
+# xiaomi = ['https://detail.tmall.com/item.htm?id=579914211622&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=570133905140&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=566510433862&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=567679236534&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=572473824056&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=573627357978&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=577610489452&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=577345730738&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=584384110633&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=589192455077&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=586768982581&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=570279488000&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=569705565098&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=584654464963&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=588763869289&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=589049441294&scene=taobao_shop']
+# Samsung = [['GalaxyS10+SM-G9750855IP684G', '6999.00'], ['GalaxyS10SM-G9730855IP684G', '5999.00'], ['GalaxyS10eSM-G9700855IP684G', '4999.00'], ['300GALAXYNote9SM-N96006+128GB/8+512GBSpen4G', '6599.00'], ['300GALAXYNote9SM-N96008+512GBSpen4G', '8599.00'], ['300GalaxyS9+SM-G9650/DS845IP684G', '5499.00'], ['300GalaxyS9SM-G9600/DS845IP684G', '4799.00'], ['GALAXYS8SM-G95004+64GB4G', '2999.003299.00'], ['GalaxyS8+SM-G95506+128GB4G', '3799.003999.00']]
