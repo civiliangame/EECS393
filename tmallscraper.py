@@ -2,7 +2,31 @@ from bs4 import BeautifulSoup
 import xlwt
 import time
 import requests
+import threading
+import timeout_decorator
 
+
+
+#A method that finds goes to a page and returns the source code.
+#With China being halfway around the world and all, sometimes connection is difficult.
+#Because of that, we will make it timeout in 10 seconds.
+#If it didn't load in 10 seconds, we can just try again.
+@timeout_decorator.timeout(10, use_signals=False)
+def getPage(link):
+    r = requests.get(link)
+    time.sleep(.5)
+    return r.content
+
+#A wrapper class for getPage. If it gets a timeoutError, we want to make it start again until it does.
+def neverSayDie(link):
+    done = False;
+    while not done:
+        try:
+            content = getPage(link)
+        except Exception:
+            continue
+        done = True
+    return content
 
 #A method that gets rid of undesirable characters in a string.
 #If a character in str is not in the string acceptables, it will take it out.
@@ -50,21 +74,21 @@ def samsungScraper():
     print("here we go")
 
     #Go to the tmall listing with all the samsung products
-    r = requests.get("https://samsung.tmall.com/")
+    content = neverSayDie("https://samsung.tmall.com/")
     print("loaded")
 
     time.sleep(.5)
-    soup = BeautifulSoup(r.content, "lxml")
+    soup = BeautifulSoup(content, "lxml")
 
     #Samsung phones are in the a tag with class attribute "jdbmc abs mcblack" for some reason.
     #I don't know why. Don't ask me. I'm just finding patterns and then using them.
     samsungphones = soup.find("a", {"class": "jdbmc abs mcblack"})
 
     #Go to the new page listing all the samsung phones that we just found.
-    r = requests.get("https:" + str(samsungphones.get("href")))
+    content = neverSayDie("https:" + str(samsungphones.get("href")))
 
     time.sleep(.5)
-    soup = BeautifulSoup(r.content, "lxml")
+    soup = BeautifulSoup(content, "lxml")
 
     #We are defining what letters/numbers/symbols we want in the string.
     nonnumbers = "0123456789."
@@ -92,12 +116,12 @@ def huaweiScraper():
     print("here we go")
 
     #Go to the site with the requests library.
-    r = requests.get("https://huawei.tmall.com/")
+    content = neverSayDie("https://huawei.tmall.com/")
     print("loaded")
     time.sleep(.5)
 
     #Download the content
-    soup = BeautifulSoup(r.content, "lxml")
+    soup = BeautifulSoup(content, "lxml")
 
     #Initializing the list that we want to return
     ptlinks = []
@@ -127,9 +151,9 @@ def huaweiScraper():
 def applescraper():
     print("here we go")
     #Go to Apple's page for tmall
-    r = requests.get("https://apple.tmall.com/")
+    content = neverSayDie("https://apple.tmall.com/")
     print("loaded")
-    soup = BeautifulSoup(r.content, "lxml")
+    soup = BeautifulSoup(content, "lxml")
 
     #Find the category that says "iphone". How nice of them to use English for the first time.
     iphones = soup.find("a", string="iPhone")
@@ -137,8 +161,8 @@ def applescraper():
     iphones_link = "https:" + iphones.get("href")
 
     #Go to that newly discovered link.
-    r = requests.get(iphones_link)
-    soup = BeautifulSoup(r.content, "lxml")
+    content = neverSayDie(iphones_link)
+    soup = BeautifulSoup(content, "lxml")
 
     #A list that will hold the links for specific iphones on sale there.
     specific_iphones = []
@@ -158,11 +182,11 @@ def xiaomiscraper():
 
     #Go to the link
     print("here we go")
-    r = requests.get("https://xiaomi.tmall.com/")
+    content = neverSayDie("https://xiaomi.tmall.com/")
     print("loaded")
 
     #Download the page source
-    soup = BeautifulSoup(r.content, "lxml")
+    soup = BeautifulSoup(content, "lxml")
 
     #Start narrowing the search. We want to look in just the top banner first.
     topbanner = soup.find("div", {"class": "topbanner"})
@@ -232,8 +256,8 @@ def xiaomiscraper():
 
 #A method that takes a specific listing page as input and returns the name/price as output.
 def specific_phones(link):
-    r = requests.get(link)
-    source_code = str(r.content)
+    content = neverSayDie(link)
+    source_code = str(content)
 
     #This would have been difficult, but luckily I found out that they store all the pricing data in a little sheet
     #Located at the bottom of the page named "TShop.Setup".
@@ -273,7 +297,7 @@ def specific_phones(link):
     phoneprice = min(priceList)
 
     #Now, we want to see the source code to figure out what the name of this phone is.
-    soup = BeautifulSoup(r.content, "lxml")
+    soup = BeautifulSoup(content, "lxml")
     #It's conveniently located in a tag named meta with attribute name = "keywords"
     meta = soup.find("meta", {"name": "keywords"})
     #Get the name
@@ -282,7 +306,12 @@ def specific_phones(link):
     #We now have a nice pairing of phonename and phoneprice.
     return[phonename, phoneprice]
 
+def main():
 
 
+    t1 = threading.Thread()
 
+appleList = []
+huaweiList = []
+xiaomiList = []
 

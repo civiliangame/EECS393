@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tmallscraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="283" lean-forward="true" selection-start-line="283" selection-end-line="283" />
+            <state relative-caret-position="3934">
+              <caret line="312" lean-forward="true" selection-start-line="312" selection-end-line="312" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/genericAmazonScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="80" column="48" lean-forward="true" selection-start-line="80" selection-start-column="48" selection-end-line="80" selection-end-column="48" />
+            <state relative-caret-position="1458">
+              <caret line="81" column="50" lean-forward="true" selection-start-line="81" selection-start-column="50" selection-end-line="81" selection-end-column="50" />
               <folding>
                 <element signature="e#29#58#0" expanded="true" />
               </folding>
@@ -47,8 +47,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>new_urls</find>
-      <find>a-row stores-row stores-widget-btf</find>
       <find>available from</find>
       <find>samsung</find>
       <find>mobil</find>
@@ -62,7 +60,6 @@
       <find>eecs</find>
       <find>replace</find>
       <find>string</find>
-      <find>text</find>
       <find>parent</find>
       <find>手机专区</find>
       <find>ptl</find>
@@ -77,9 +74,14 @@
       <find>selenium</find>
       <find>purgeString</find>
       <find>print</find>
+      <find>text</find>
+      <find>requests.get</find>
+      <find>r.content</find>
     </findStrings>
     <replaceStrings>
       <replace>apple</replace>
+      <replace>content = neverSayDie</replace>
+      <replace>content</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -388,8 +390,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/genericAmazonScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="80" column="48" lean-forward="true" selection-start-line="80" selection-start-column="48" selection-end-line="80" selection-end-column="48" />
+        <state relative-caret-position="1458">
+          <caret line="81" column="50" lean-forward="true" selection-start-line="81" selection-start-column="50" selection-end-line="81" selection-end-column="50" />
           <folding>
             <element signature="e#29#58#0" expanded="true" />
           </folding>
@@ -398,8 +400,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tmallscraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="283" lean-forward="true" selection-start-line="283" selection-end-line="283" />
+        <state relative-caret-position="3934">
+          <caret line="312" lean-forward="true" selection-start-line="312" selection-end-line="312" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
