@@ -180,7 +180,46 @@ def samsungScraper():
     print(phonelist)
     return phonelist
 
-huaweiScraper()
+
+def samsungScraper2():
+    #We can just use requests since they don't block it
+    print("here we go")
+    r = requests.get("https://samsung.tmall.com/")
+    print("loaded")
+
+
+
+    #driver.get("https://huawei.tmall.com/")
+    time.sleep(.5)
+    soup = BeautifulSoup(r.content, "lxml")
+
+    samsungphones = soup.find("a", {"class": "jdbmc abs mcblack"})
+    print(samsungphones.get("href"))
+    r = requests.get("https:" + str(samsungphones.get("href")))
+
+    time.sleep(.5)
+    soup = BeautifulSoup(r.content, "lxml")
+
+    nonnumbers = "0123456789."
+    nonchinese = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&\()*+,-./:;<=>?@[]^_`{|}~"
+    phonelist = []
+    phonename = ""
+    phoneprice = 0
+
+    for item in soup.find_all("a", {"class": "item-name"}):
+        phonename = item.get_text().replace("Samsung/", "")
+        pricediv = item.find_next_sibling("div")
+        phoneprice = pricediv.get_text().replace('\n', '')
+        phonename = purgeString(phonename, nonchinese)
+        phoneprice = purgeString(phoneprice, nonnumbers)
+        print(phonename)
+        print(phoneprice)
+        phonelist.append([phonename, phoneprice])
+    print(phonelist)
+    return phonelist
+
+
+samsungScraper2()
 
 
 
