@@ -29,6 +29,7 @@ def neverSayDie(link):
             print("Not Dead Yet.")
             continue
         done = True
+    print("loaded")
     return content
 
 #A method that gets rid of undesirable characters in a string.
@@ -82,7 +83,7 @@ def samsungScraper():
 
     #Go to the tmall listing with all the samsung products
     content = neverSayDie("https://samsung.tmall.com/")
-    print("loaded")
+    
 
     time.sleep(.5)
     soup = BeautifulSoup(content, "lxml")
@@ -126,7 +127,7 @@ def huaweiScraper():
 
     #Go to the site with the requests library.
     content = neverSayDie("https://huawei.tmall.com/")
-    print("loaded")
+    
     time.sleep(.5)
 
     #Download the content
@@ -163,7 +164,7 @@ def applescraper():
     print("here we go")
     #Go to Apple's page for tmall
     content = neverSayDie("https://apple.tmall.com/")
-    print("loaded")
+    
     soup = BeautifulSoup(content, "lxml")
 
     #Find the category that says "iphone". How nice of them to use English for the first time.
@@ -195,7 +196,7 @@ def xiaomiscraper():
     #Go to the link
     print("here we go")
     content = neverSayDie("https://xiaomi.tmall.com/")
-    print("loaded")
+    
 
     #Download the page source
     soup = BeautifulSoup(content, "lxml")
@@ -352,7 +353,7 @@ def main():
     for i in range(0, len(bigList)):
         if i < appleLength:
             company = "Apple"
-        if i < huaweiList + appleList - 1:
+        if i < huaweiLength + appleLength - 1:
             company = "Huawei"
         else:
             copmany = "Xiaomi"
@@ -365,7 +366,7 @@ def main():
     for j in jobs:
         j.join()
     print("Assimilation Complete")
-
+    print(resultList)
 samsungList = []
 appleList = []
 huaweiList = []

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b837da7f-4f26-41ff-b9f7-9edd979f9b1e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/genericAmazonScraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/genericAmazonScraper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tmallscraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmallscraper.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tmallscraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="366" column="32" selection-start-line="366" selection-start-column="32" selection-end-line="366" selection-end-column="32" />
+            <state relative-caret-position="347">
+              <caret line="40" column="13" lean-forward="true" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -48,8 +47,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>samsung</find>
-      <find>mobil</find>
       <find>mobile</find>
       <find>not in</find>
       <find>time.sleep</find>
@@ -78,11 +75,14 @@
       <find>r.content</find>
       <find>text</find>
       <find>specific_phones</find>
+      <find>loaded</find>
+      <find>print(&quot;loaded&quot;)</find>
     </findStrings>
     <replaceStrings>
       <replace>apple</replace>
       <replace>content = neverSayDie</replace>
       <replace>content</replace>
+      <replace>&quot;&quot;</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -401,8 +401,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tmallscraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="366" column="32" selection-start-line="366" selection-start-column="32" selection-end-line="366" selection-end-column="32" />
+        <state relative-caret-position="347">
+          <caret line="40" column="13" lean-forward="true" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
