@@ -4,6 +4,12 @@ import time
 import requests
 import threading
 import timeout_decorator
+#Global Variables
+samsungList = []
+appleList = []
+huaweiList = []
+xiaomiList = []
+resultList = []
 
 
 
@@ -114,7 +120,7 @@ def samsungScraper():
         phoneprice = purgeString(phoneprice, nonnumbers)
 
         #Append a list of name/price to the phone list
-        phonelist.append([phonename, phoneprice])
+        phonelist.append([phonename, phoneprice, "Samsung"])
 
     #Return the phonelist
     samsungList = phonelist
@@ -150,7 +156,7 @@ def huaweiScraper():
                 #We want to find the urls
                 for a in rel.find_all("a", {"target": "_blank", "data-linkmode" : "ptlink"}):
                     #Find all the tags with "href" append it to the list
-                    ptlinks.append("https:" + str(a.get("href")))
+                    ptlinks.append(["https:" + str(a.get("href")), "Huawei"])
 
     #We now have all the links that are listed for their phones. We can return it.
     huaweiList = ptlinks
@@ -184,7 +190,7 @@ def applescraper():
     for phonelink in soup.find_all("a", string="购买"):
         #Get the url from this page and add it to the list
         url = str(phonelink.get("href"))
-        specific_iphones.append(url)
+        specific_iphones.append([url, "Apple"])
     appleList = specific_iphones
 
 #A method that finds the urls of all phones listed on Xiaomi's tmall page.
@@ -247,7 +253,7 @@ def xiaomiscraper():
                 if detailedUrl != None:
 
                     #Append it to the list.
-                    urls.append("https:" + detailedUrl)
+                    urls.append(["https:" + detailedUrl, "Xiaomi"])
 
     #Same thing as above, since Xiaomi seems to have two cell phone categories.
     #The only difference is that the location has changed. Everything else is the same.
@@ -262,13 +268,14 @@ def xiaomiscraper():
             for a in allDivs.find_all("a"):
                 detailedUrl = a.get("href")
                 if detailedUrl != None:
-                    urls.append("https:" + detailedUrl)
+                    urls.append(["https:" + detailedUrl, "Xiaomi"])
 
     #Now that we have a list of all urls, we can just return it.
     xiaomiList = urls
 
 #A method that takes a specific listing page as input and returns the name/price as output.
 def specific_phones(link, company):
+    print(link)
     global resultList
     print("starting specific_phones")
     content = neverSayDie(link)
@@ -321,60 +328,38 @@ def specific_phones(link, company):
     #We now have a nice pairing of phonename and phoneprice.
     resultList.append([phonename, phoneprice, company])
 
+#Main Method
 def main():
-    # t1 = threading.Thread(target=applescraper)
-    # t2 = threading.Thread(target=huaweiScraper)
-    # t3 = threading.Thread(target=xiaomiscraper)
-    # t4 = threading.Thread(target=samsungScraper)
-    #
-    # t1.start()
-    # t2.start()
-    # t3.start()
-    # t4.start()
-    # t1.join()
-    # t2.join()
-    # t3.join()
-    # t4.join()
-    # print("apple = " + str(appleList))
-    # print("huawei = " + str(huaweiList))
-    # print("xiaomi = " + str(xiaomiList))
-    # print("Samsung = " + str(samsungList))
-    apple = ['https://detail.tmall.com/item.htm?id=579791278840', 'https://detail.tmall.com/item.htm?id=577249277344',
-             'https://detail.tmall.com/item.htm?id=558420556696&scene=taobao_shop']
-    huawei = ['https://detail.tmall.com/item.htm?id=581727960031&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=567332753408&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=575984231019&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=579196707747&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=583857290585&scene=taobao_shop']
-    xiaomi = ['https://detail.tmall.com/item.htm?id=579914211622&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=570133905140&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=566510433862&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=567679236534&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=572473824056&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=573627357978&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=577610489452&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=577345730738&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=584384110633&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=589192455077&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=586768982581&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=570279488000&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=569705565098&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=584654464963&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=588763869289&scene=taobao_shop',
-              'https://detail.tmall.com/item.htm?id=589049441294&scene=taobao_shop']
-    Samsung = [['GalaxyS10+SM-G9750855IP684G', '6999.00'], ['GalaxyS10SM-G9730855IP684G', '5999.00'],
-               ['GalaxyS10eSM-G9700855IP684G', '4999.00'], ['300GALAXYNote9SM-N96006+128GB/8+512GBSpen4G', '6599.00'],
-               ['300GALAXYNote9SM-N96008+512GBSpen4G', '8599.00'], ['300GalaxyS9+SM-G9650/DS845IP684G', '5499.00'],
-               ['300GalaxyS9SM-G9600/DS845IP684G', '4799.00'], ['GALAXYS8SM-G95004+64GB4G', '2999.003299.00'],
-               ['GalaxyS8+SM-G95506+128GB4G', '3799.003999.00']]
-    appleList = apple
-    huaweiList = huawei
-    xiaomiList = xiaomi
-    appleLength = len(appleList)
-    huaweiLength = len(huaweiList)
-    xiaomiLength = len(xiaomiList)
+
+    #Defining Global Variables
+    global appleList
+    global huaweiList
+    global xiaomiList
+    global samsungList
+
+    #Define Threads and start scraping apple, huawei,xiaomi, and samsung
+    t1 = threading.Thread(target=applescraper)
+    t2 = threading.Thread(target=huaweiScraper)
+    t3 = threading.Thread(target=xiaomiscraper)
+    t4 = threading.Thread(target=samsungScraper)
+
+    #Start Threads
+    t1.start()
+    t2.start()
+    t3.start()
+    t4.start()
+
+    #Join Threads
+    t1.join()
+    t2.join()
+    t3.join()
+    t4.join()
+
+
+    #This is going to be where everything comes together for the first time
     bigList = []
 
+    #Move everything to biglist
     for a in appleList:
         bigList.append(a)
     for h in huaweiList:
@@ -382,34 +367,67 @@ def main():
     for x in xiaomiList:
         bigList.append(x)
 
+    #The list of threads
     jobs = []
-    company = ""
+
+    #Assign threads
     for i in range(0, len(bigList)):
-        if i < appleLength:
-            company = "Apple"
-        if i < huaweiLength + appleLength - 1:
-            company = "Huawei"
-        else:
-            copmany = "Xiaomi"
-        thread = threading.Thread(target=specific_phones, args=(bigList[i], company))
+        thread = threading.Thread(target=specific_phones, args=(bigList[i][0], bigList[i][1]))
         jobs.append(thread)
 
+    #Start the jobs
     for j in jobs:
         j.start()
-
+    #Join the jobs
     for j in jobs:
         j.join()
-    print("Assimilation Complete")
-    print(resultList)
-samsungList = []
-appleList = []
-huaweiList = []
-xiaomiList = []
-resultList = []
-main()
+
+    #Samsung was nice and let us skip a step. Now we're going to add it back in.
+    for samsungphone in samsungList:
+        #Get rid of the period and the numbers after it for consistency
+        samsungphone[1] = int(samsungphone[1][:samsungphone[1].find(".")])
+        #Append it to the resultsList
+        resultList.append(samsungphone)
+
+    #This is the final list
+    finalList = []
+
+    #Migrate everything over and also add the source
+    for result in resultList:
+        finalList.append([result[0], "元" + str(result[1]), result[2], "tmall"])
+
+    #Return it
+    return finalList
 
 
-# apple = ['https://detail.tmall.com/item.htm?id=579791278840', 'https://detail.tmall.com/item.htm?id=577249277344', 'https://detail.tmall.com/item.htm?id=558420556696&scene=taobao_shop']
-# huawei = ['https://detail.tmall.com/item.htm?id=581727960031&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=567332753408&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=575984231019&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=579196707747&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=583857290585&scene=taobao_shop']
-# xiaomi = ['https://detail.tmall.com/item.htm?id=579914211622&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=570133905140&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=566510433862&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=567679236534&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=572473824056&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=573627357978&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=577610489452&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=577345730738&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=584384110633&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=589192455077&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=586768982581&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=570279488000&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=569705565098&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=584654464963&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=588763869289&scene=taobao_shop', 'https://detail.tmall.com/item.htm?id=589049441294&scene=taobao_shop']
-# Samsung = [['GalaxyS10+SM-G9750855IP684G', '6999.00'], ['GalaxyS10SM-G9730855IP684G', '5999.00'], ['GalaxyS10eSM-G9700855IP684G', '4999.00'], ['300GALAXYNote9SM-N96006+128GB/8+512GBSpen4G', '6599.00'], ['300GALAXYNote9SM-N96008+512GBSpen4G', '8599.00'], ['300GalaxyS9+SM-G9650/DS845IP684G', '5499.00'], ['300GalaxyS9SM-G9600/DS845IP684G', '4799.00'], ['GALAXYS8SM-G95004+64GB4G', '2999.003299.00'], ['GalaxyS8+SM-G95506+128GB4G', '3799.003999.00']]
+if __name__ == '__main__':
+    main()
+# main()
+
+
+#Sample Data
+#resultList = [['【4+64G低至799】Xiaomi/小米 红米6 ai双摄8核全面屏智能学生老人拍照青春手机正品官方旗舰店Redm7Xnote5', 799, 'Xiaomi', 'tmall'], ['【优惠300元】荣耀Magic2华为HONOR/荣耀 智能全面手机官网全新正品荣耀magic2新款青春手机官方旗舰店8xV20', 3799, 'Huawei', 'tmall'], ['【4日2日10点开售】Xiaomi/小米 Redmi Note 7 Pro 新品骁龙675索尼4800万智能拍照水滴屏手机官方旗舰店', 1599, 'Xiaomi', 'tmall'], ['【稀缺宝石蓝】Xiaomi/小米小米MIX 3滑盖全面屏旗舰骁龙845拍照游戏官方旗舰店正品米9mix3故宫版mix2sxr', 3299, 'Xiaomi', 'tmall'], ['【爆款直降】Xiaomi/小米 红米6a智能老人学生青春拍照手机小米8周年官方旗舰店正品双卡双待4G全网通note5', 599, 'Xiaomi', 'tmall'], ['【到手价1599元起】Xiaomi/小米 小米Max3全面屏大屏大电量游戏手机智能拍照手机官方旗舰店正品米9note7', 1699, 'Xiaomi', 'tmall'], ['【低至1299元】华为HONOR/荣耀10青春版V珍珠全面屏2400万AI自拍渐变色智能学生游戏拍照手机官方旗舰店网', 1399, 'Huawei', 'tmall'], ['Xiaomi/小米 小米9 SE 骁龙712水滴屏拍照智能手机4800万超广角三摄拍照手机小米官方旗舰店 屏幕指纹解锁8SE', 1999, 'Xiaomi', 'tmall'], ['【8+128GB到手2899起】Xiaomi/小米 小米8屏幕指纹版9全面屏拍照手机8小米官旗青春红米note7骁龙845透明版', 3199, 'Xiaomi', 'tmall'], ['【6+64G低至1499】Xiaomi/小米 小米8 青春版全面屏智能拍照游戏手机学生商务9官方旗舰店正品红米note7note5', 1399, 'Xiaomi', 'tmall'], ['【指定版本赠燃脂配件】华为HONOR/荣耀V20新品全视屏麒麟980处理器4800万AI摄影智能游戏学生手机V10官网', 2999, 'Huawei', 'tmall'], ['【4+64GB下单赠配件】华为HONOR荣耀8X全面大屏幕指纹解锁智能游戏青春学生新手机老年人电话机官方网旗舰店', 1399, 'Huawei', 'tmall'], ['【6+128G低至1699】Xiaomi/小米 小米8SE 全面屏拍照游戏智能手机AI双摄红米note7 小米官旗9 青春版6+64GB灰', 1999, 'Xiaomi', 'tmall'], ['Apple/苹果 iPhone 8', 5099, 'Apple', 'tmall'], ['【新品现货速抢！】Xiaomi/小米 Redmi 7 红米7 骁龙632八核双摄智能拍照水滴屏手机 官方旗舰正品', 799, 'Xiaomi', 'tmall'], ['【高颜值+大流量】Xiaomi/小米 小米Play 官方旗舰店 8周年青春版全面屏双卡青春智能拍照游戏手机红米6pro', 1099, 'Xiaomi', 'tmall'], ['【现货开售】Xiaomi/小米 Redmi 红米Note7 骁龙660智能4800万拍照千元水滴屏pro手机9官方旗舰店正品note5', 999, 'Xiaomi', 'tmall'], ['【6+128G 2499元起】Xiaomi/小米小米8年度旗舰全面屏骁龙845指纹版智能拍照游戏手机旗舰官方', 2999, 'Xiaomi', 'tmall'], ['【8+256GB白色低至3399】Xiaomi/小米 MIX 2S全面屏骁龙845双摄手机智能游戏商务AI双摄mix3', 3999, 'Xiaomi', 'tmall'], ['Apple/苹果 iPhone XS', 8699, 'Apple', 'tmall'], ['Apple/苹果 iPhone XR', 6499, 'Apple', 'tmall'], ['【领券低至2099元】华为HONOR/荣耀 10GT游戏V2400万AI摄影全面屏网通智能拍照手机官方旗舰店官网学生双卡', 2599, 'Huawei', 'tmall'], ['【4月2日10点开卖】Xiaomi/小米小米9 骁龙855全面屏索尼4800万三摄指纹拍照游戏手机官方旗舰NFC王源代言', 2999, 'Xiaomi', 'tmall'], ['【爆款钜惠】Xiaomi/小米 6X智能AI双摄拍照学生老人青春手机小米8官方旗舰店正品双卡双待红米note7', 1799, 'Xiaomi', 'tmall'], ['GalaxyS10+SM-G9750855IP684G', 6999, 'Samsung', 'tmall'], ['GalaxyS10SM-G9730855IP684G', 5999, 'Samsung', 'tmall'], ['GalaxyS10eSM-G9700855IP684G', 4999, 'Samsung', 'tmall'], ['300GALAXYNote9SM-N96006+128GB/8+512GBSpen4G', 6599, 'Samsung', 'tmall'], ['300GALAXYNote9SM-N96008+512GBSpen4G', 8599, 'Samsung', 'tmall'], ['300GalaxyS9+SM-G9650/DS845IP684G', 5499, 'Samsung', 'tmall'], ['300GalaxyS9SM-G9600/DS845IP684G', 4799, 'Samsung', 'tmall'], ['GALAXYS8SM-G95004+64GB4G', 2999, 'Samsung', 'tmall'], ['GalaxyS8+SM-G95506+128GB4G', 3799, 'Samsung', 'tmall']]
+# apple = [['https://detail.tmall.com/item.htm?id=579791278840', 'Apple'],
+    #          ['https://detail.tmall.com/item.htm?id=577249277344', 'Apple'],
+    #          ['https://detail.tmall.com/item.htm?id=558420556696&scene=taobao_shop', 'Apple']]
+    # huawei = [['https://detail.tmall.com/item.htm?id=581727960031&scene=taobao_shop', 'Huawei'],
+    #           ['https://detail.tmall.com/item.htm?id=567332753408&scene=taobao_shop', 'Huawei'],
+    #           ['https://detail.tmall.com/item.htm?id=575984231019&scene=taobao_shop', 'Huawei'],
+    #           ['https://detail.tmall.com/item.htm?id=579196707747&scene=taobao_shop', 'Huawei'],
+    #           ['https://detail.tmall.com/item.htm?id=583857290585&scene=taobao_shop', 'Huawei']]
+    # xiaomi = [['https://detail.tmall.com/item.htm?id=579914211622&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=570133905140&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=566510433862&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=567679236534&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=572473824056&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=573627357978&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=577610489452&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=577345730738&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=584384110633&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=589192455077&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=586768982581&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=570279488000&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=569705565098&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=584654464963&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=588763869289&scene=taobao_shop', 'Xiaomi'],
+    #           ['https://detail.tmall.com/item.htm?id=589049441294&scene=taobao_shop', 'Xiaomi']]

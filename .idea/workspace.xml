@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b837da7f-4f26-41ff-b9f7-9edd979f9b1e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/sampledata.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wrapper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/genericAmazonScraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/genericAmazonScraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results.xls" beforeDir="false" afterPath="$PROJECT_DIR$/results.xls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tmallscraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmallscraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/tmallscraper.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tmallscraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="410" lean-forward="true" selection-start-line="410" selection-end-line="410" />
+            <state relative-caret-position="148">
+              <caret line="400" selection-start-line="400" selection-end-line="400" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -26,13 +32,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wrapper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/genericAmazonScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4086">
-              <caret line="231" column="48" selection-start-line="231" selection-start-column="48" selection-end-line="231" selection-end-column="48" />
+            <state relative-caret-position="180">
+              <caret line="230" selection-start-line="230" selection-end-line="230" />
               <folding>
                 <element signature="e#29#58#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sampledata.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -48,14 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>not in</find>
-      <find>time.sleep</find>
-      <find>field username-field</find>
-      <find>login</find>
-      <find>username</find>
-      <find>clicked</find>
-      <find>eecs</find>
-      <find>replace</find>
       <find>string</find>
       <find>parent</find>
       <find>手机专区</find>
@@ -68,16 +96,24 @@
       <find>rel</find>
       <find>while</find>
       <find>price</find>
-      <find>selenium</find>
       <find>purgeString</find>
-      <find>print</find>
       <find>requests.get</find>
       <find>r.content</find>
       <find>text</find>
-      <find>specific_phones</find>
       <find>loaded</find>
       <find>print(&quot;loaded&quot;)</find>
       <find>starting specific</find>
+      <find>print(</find>
+      <find>find_product</find>
+      <find>selenium</find>
+      <find>specific_phones</find>
+      <find>find_product_deta</find>
+      <find>print</find>
+      <find>find_specific</find>
+      <find>[</find>
+      <find>find_product_details2</find>
+      <find>find_specific_phones</find>
+      <find>Checking for linux64 chromedriver:2.46 in cache</find>
     </findStrings>
     <replaceStrings>
       <replace>apple</replace>
@@ -100,15 +136,20 @@
         <option value="$PROJECT_DIR$/LGScrpaer.py" />
         <option value="$PROJECT_DIR$/AmazonScraper.py" />
         <option value="$PROJECT_DIR$/venv/tmallscraper.py" />
-        <option value="$PROJECT_DIR$/genericAmazonScraper.py" />
+        <option value="$PROJECT_DIR$/venv/wrapper.py" />
+        <option value="$PROJECT_DIR$/sampledata.py" />
+        <option value="$PROJECT_DIR$/wrapper.py" />
         <option value="$PROJECT_DIR$/tmallscraper.py" />
+        <option value="$PROJECT_DIR$/genericAmazonScraper.py" />
+        <option value="$PROJECT_DIR$/README" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="644" />
-    <option name="width" value="1272" />
-    <option name="height" value="692" />
+    <option name="x" value="-133" />
+    <option name="y" value="174" />
+    <option name="width" value="1252" />
+    <option name="height" value="690" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -153,6 +194,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/venv" />
     </key>
   </component>
@@ -168,7 +210,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.tmallscraper">
+  <component name="RunManager" selected="Python.wrapper">
     <configuration name="AmazonScraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="EECS393" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -203,27 +245,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="HuaweiScraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="EECS393" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HuaweiScraper.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -295,21 +316,42 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="wrapper" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="EECS393" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wrapper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.EECS393" />
       <item itemvalue="Python.AmazonScraper" />
-      <item itemvalue="Python.HuaweiScraper" />
       <item itemvalue="Python.LGScrpaer" />
       <item itemvalue="Python.genericAmazonScraper" />
       <item itemvalue="Python.tmallscraper" />
+      <item itemvalue="Python.wrapper" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.tmallscraper" />
+        <item itemvalue="Python.wrapper" />
         <item itemvalue="Python.genericAmazonScraper" />
+        <item itemvalue="Python.tmallscraper" />
         <item itemvalue="Python.AmazonScraper" />
         <item itemvalue="Python.LGScrpaer" />
-        <item itemvalue="Python.HuaweiScraper" />
       </list>
     </recent_temporary>
   </component>
@@ -339,12 +381,12 @@
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17606747" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17606747" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43886462" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.375" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -380,20 +422,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/tmallscraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="57" column="48" lean-forward="true" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/tmallscraper.py" />
     <entry file="file://$PROJECT_DIR$/tmallscraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="410" lean-forward="true" selection-start-line="410" selection-end-line="410" />
+        <state relative-caret-position="148">
+          <caret line="400" selection-start-line="400" selection-end-line="400" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
@@ -402,11 +435,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/genericAmazonScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4086">
-          <caret line="231" column="48" selection-start-line="231" selection-start-column="48" selection-end-line="231" selection-end-column="48" />
+        <state relative-caret-position="180">
+          <caret line="230" selection-start-line="230" selection-end-line="230" />
           <folding>
             <element signature="e#29#58#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sampledata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>

@@ -1,9 +1,47 @@
-This script will scrape all the officially listed smartphones from Samsung, LG, Apple, and Huawei on Amazon.
-After gathering data through selenium and beautifulsoup, it will save the name and price in an excel spreadsheet named "results.xls"
+This is my contribution to my Software Engineering group project.
 
-Just run it and it will do all the work for you.
-In order to run this script, you must have the following libraries installed: Beautifulsoup, selenium, webdriver_manager.chrome, xlwt, time
-Furthermore, you must place the "chromedriver" file in the same directory as genericAmazonScraper.py and have google chrome installed. 
+I made a web crawler for both amazon and tmall.
+As far as I could tell, tmall is China's Amazon.
 
-Enjoy! 
+
+Using Selenium, BeautifulSoup, and Requests, this script will collect all the available
+name/price of the smartphones officially listed from Huawei, Xiaomi, LG, Samsung, and Apple on both tmall and amazon.
+Afterwards, it will very nicely put it in an excel spreadsheet.
+
+In order to run this script, first run the Makefile to install all the necessary libraries on to your python.
+You must have pip installed for this along with python 3.X.
+Furthermore, you must place the "chromedriver" file in the same directory as genericAmazonScraper.py and have google chrome installed.
+
+All you have to do is run wrapper.py and you are done!
+
+Every bit of code is meticulously documented, so it should be very easy to follow along.
+
+I used two completely different methods to do web scraping for tmall and Amazon.
+tmallscraper used the requests library exclusively and genericAmazonScraper used the selenium library exclusively.
+I'd like to explain why I did so here.
+
+First, it's to flex and show off. Selenium looks cool as hell during a demo since you can see everything.
+Second, and most importantly, I had no choice.
+Amazon blocks access from the requests library completely.
+I don't know how they detect it, but I suspect it has something to do with cookies and javascript.
+Therefore, I have to use selenium by process of elimination.
+
+tmall, on the other hand, is the most inconvenient site I've ever tried to build a crawler for by far.
+I admit that a big part of it is because it's all in Chinese, and I can't read chinese.
+That alone made programming a crawler a living nightmare since I had no idea what any of this was saying.
+Another big part is that its servers are on the other side of the planet. This makes things super slow.
+Luckily, they didn't block the requests library so that was a huge relief. In my earlier commits, I tried using selenium
+here too. The pages took forever to load and it kept crashing, so I was forced to use something else.
+
+However, another big part that I cannot dismiss is that the site is just shitty.
+It's just not clean. Everything is so cluttered and unpleasant to look at.
+Furthermore, there aren't many patterns to the html structure which makes me suspect that it's a poorly designed site.
+Well-designed sites have a pretty HTML tree.
+tmall's HTML tree looks like a Womping Willow that barely survived a nuclear fallout by comparison.
+
+Enjoy, and please don't make me look at this stuff again. It works perfectly after meticulous testing and I completely
+refuse to do a single iota of more work.
+
+Goodnight,
+Phillip
 

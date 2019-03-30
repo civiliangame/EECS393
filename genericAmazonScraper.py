@@ -5,7 +5,33 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import xlwt
 import time
+import requests
+import timeout_decorator
 
+#A method that finds goes to a page and returns the source code.
+#With China being halfway around the world and all, sometimes connection is difficult.
+#Because of that, we will make it timeout in 10 seconds.
+#If it didn't load in 10 seconds, we can just try again.
+@timeout_decorator.timeout(10, use_signals=False)
+def getPage(link):
+    #print("starting getPage")
+    r = requests.get(link)
+    time.sleep(.5)
+    return r.content
+
+#A wrapper class for getPage. If it gets a timeoutError, we want to make it start again until it does.
+def neverSayDie(link):
+    #print("starting neverSayDie")
+    done = False;
+    while not done:
+        try:
+            content = getPage(link)
+        except Exception as e:
+            print(e)
+            continue
+        done = True
+    #print("loaded")
+    return content
 
 #Will add element to list if it doesn't exist in it already.
 def add_to_list(element, list):
@@ -92,7 +118,7 @@ def find_smartphone_category(driver):
 
 
 #A method that will find all the links of whatever phones they have on their smartphone page.
-def find_specific_phones(driver):
+def find_specific_phones(driver, company):
 
     #Download the page source for scraping
     soup = BeautifulSoup(driver.page_source, "lxml")
@@ -117,6 +143,10 @@ def find_specific_phones(driver):
             if "comhttps:" not in potential:
                 add_to_list(potential, phoneLinks)
 
+    #We're not going to do btf because btf is accessories for apple
+    if company == "Apple":
+        return phoneLinks
+
     #Now, we will do the same for the btf level. I didn't think it was worth making a new method for this
     #So please excuse the only copy and pasted code.
     for storesRow2 in soup.find_all("div", {"class": "a-row stores-row stores-widget-btf"}):
@@ -130,14 +160,13 @@ def find_specific_phones(driver):
 
 
 #A method that, given the product link on any amazon page, will go and find the name and price and return it in a list
-def find_product_details(link, driver):
+def find_product_details(link, driver, companyName):
 
     #Goes to the link
     driver.get(link)
-
+    time.sleep(.1)
     #Take a quick break to make sure that amazon doesn't block us for being bots
     #And, most importantly, to allow javascript to load in the page
-    time.sleep(2)
 
     #Initializing fields
     product_name = ""
@@ -168,16 +197,16 @@ def find_product_details(link, driver):
         return []
 
     #return the product name and product price in a list
-    return [product_name, product_price]
+    return [product_name, product_price, companyName, "Amazon"]
 
 
 #The main method
 def main():
     #initialize company names that we will be scraping for
-    company_names = ["lg", "samsung", "apple", "huawei"]
+    company_names = ["LG", "Samsung", "Apple", "Huawei"]
 
     products = []
-
+    companyProducts = []
     #This will give us a list of all the specific pages of all phones made by companies in our list.
     for company in company_names:
         #initialize selenium webdriver. This will be what we use to crawl amazon.
@@ -190,47 +219,45 @@ def main():
         companyphoneurls = find_smartphone_category(driver)
         for url in companyphoneurls:
             driver.get(url)
-            time.sleep(1)
+            time.sleep(.1)
 
-            products.append(find_specific_phones(driver))
+            products.append(find_specific_phones(driver, company))
+
         driver.close()
 
 
     driver = webdriver.Chrome(ChromeDriverManager().install())
-    #Now that we have all the pages, we will go generate a spreadsheet for this stuff.
 
 
     output = []
-    for company in products:
-        for page in company:
-            phoneinfo = find_product_details(page, driver)
+
+
+    print("Products")
+    print(products)
+    for i in range(len(products)):
+        for page in products[i]:
+
+            #We're going to have to do LG three times because there are three LG categories
+            company_names = ["LG", "LG", "LG", "Samsung", "Apple", "Huawei"]
+
+            #Call the find_product_details function
+            phoneinfo = find_product_details(page, driver, company_names[i])
+
+            #Make sure its not empty
             if len(phoneinfo) != 0:
                 output.append(phoneinfo)
-    print(output)
+                print(phoneinfo)
 
 
+    #Just making sure there aren't any undesirables here before packaging it up to go
     for product in output:
         if len(product) == 0:
             output = output.remove(product)
     print(output)
+    return(output)
 
 
-    #Make a excel spreadsheet
-    book = xlwt.Workbook(encoding="utf-8")
-    sheet1 = book.add_sheet("Sheet 1")
-
-    sheet1.write(0, 0, "Phone Name")
-    sheet1.write(0, 1, "Amazon Price")
-    sheet1.write(0, 2, "Alibaba Price")
-    sheet1.write(0,3,"Company Name")
-
-    print(len(output))
-    for i in range(0, len(output)):
-        for j in range(0, 2):
-            print("i = " + str(i) + " , j = " + str(j))
-            print(output[i][j])
-            sheet1.write(i + 1, j, output[i][j])
-    book.save("results.xls")
-
+#Sample output:
+#output=[['LG Electronics LG V40 Factory Unlocked Phone - 6.4Inch Screen - 64GB - Black (U.S. Warranty)', '$949.99', 'LG', 'Amazon'], ['LG V35 ThinQ with Alexa Hands-Free – Prime Exclusive Phone – Unlocked – 64 GB – Aurora Black', '$649.99', 'LG', 'Amazon'], ['LG Electronics G7 ThinQ Factory Unlocked Phone - 6.1" Screen - 64GB - Aurora Black (U.S. Warranty)', '$618.50', 'LG', 'Amazon'], ['LG Electronics K8 2018 Factory Unlocked Phone - 5 Inch Screen - 16GB - Morrocan Blue (U.S. Warranty)', '$119.94', 'LG', 'Amazon'], ['LG Electronics K30 Factory Unlocked Phone, 16GB (U.S. Warranty) - 5.3" - Black', '$140.00', 'LG', 'Amazon'], ['Samsung Galaxy S10+ Factory Unlocked Phone with 1TB (U.S. Warranty), Ceramic White', '$1,599.99', 'Samsung', 'Amazon'], ['Samsung Galaxy S10 Factory Unlocked Phone with 512GB (U.S. Warranty), Prism White', '$1,149.99', 'Samsung', 'Amazon'], ['Apple iPhone XS Max (64GB) - Silver - [works exclusively with Simple Mobile]', '$1,099.99', 'Apple', 'Amazon'], ['Apple iPhone XS Max (64GB) - Gold - [works exclusively with Simple Mobile]', '$1,099.99', 'Apple', 'Amazon'], ['Apple iPhone XS Max (64GB) - Space Gray- [works exclusively with Simple Mobile]', '$1,099.99', 'Apple', 'Amazon'], ['Apple iPhone XS (64GB) - Gold - [works exclusively with Simple Mobile]', '$999.99', 'Apple', 'Amazon'], ['Apple iPhone XS (64GB) - Space Gray - [works exclusively with Simple Mobile]', '$999.99', 'Apple', 'Amazon'], ['Apple iPhone XR (64GB) - Black - [works exclusively with Simple Mobile]', '$749.00', 'Apple', 'Amazon'], ['Apple iPhone XR (64GB) - (PRODUCT)RED [works exclusively with Simple Mobile]', '$749.99', 'Apple', 'Amazon'], ['Apple iPhone XR (64GB) - Black - [works exclusively with Simple Mobile]', '$749.00', 'Apple', 'Amazon'], ['Apple iPhone XR (64GB) - Black - [works exclusively with Simple Mobile]', '$749.00', 'Apple', 'Amazon'], ['Apple iPhone X (64GB) - Silver - [works exclusively with Simple Mobile]', '$899.00', 'Apple', 'Amazon'], ['Apple iPhone 8 (64GB) - Silver - [works exclusively with Simple Mobile]', '$649.00', 'Apple', 'Amazon'], ['Apple iPhone 7 Plus (32GB) - Black - [works exclusively with Simple Mobile]', '$399.99', 'Apple', 'Amazon'], ['Apple iPhone 7 Plus (32GB) Silver - [Simple Mobile]', '$399.99', 'Apple', 'Amazon'], ['Apple iPhone 7 (32GB) - Black - [works exclusively with Simple Mobile]', '$299.99', 'Apple', 'Amazon'], ['Apple iPhone 7 (32GB) - Gold - [works exclusively with Simple Mobile]', '$299.99', 'Apple', 'Amazon'], ['Apple iPhone 6s Plus (32GB) - Rose Gold [Locked to Simple Mobile Prepaid]', '$299.99', 'Apple', 'Amazon'], ['Apple iPhone 6S (32GB) - Space Gray - [works exclusively with Simple Mobile]', '$199.99', 'Apple', 'Amazon'], ['Huawei Mate SE Factory Unlocked 5.93” - 4GB/64GB Octa-core Processor| 16MP + 2MP Dual Camera| GSM Only |Grey (US Warranty)', '$219.99', 'Huawei', 'Amazon'], ['Huawei Mate 10 Pro Unlocked Phone, 6" 6GB/128GB, AI Processor, Dual Leica Camera, Water Resistant IP67, GSM Only - Titanium Gray (US Warranty)', '$489.98', 'Huawei', 'Amazon'], ['Huawei Mate 10 Pro Unlocked Phone, 6" 6GB/128GB, AI Processor, Dual Leica Camera, Water Resistant IP67, GSM Only - Midnight Blue (US Warranty)', '$489.00', 'Huawei', 'Amazon'], ['Huawei Mate 10 Pro Unlocked Phone, 6" 6GB/128GB, AI Processor, Dual Leica Camera, Water Resistant IP67, GSM Only - Mocha Brown (US Warranty)', '$497.00', 'Huawei', 'Amazon'], ['Huawei Mate 10 Porsche Design Factory Unlocked 256GB Android Smartphone Diamond Black', '$728.99', 'Huawei', 'Amazon']]
 if __name__ == '__main__':
     main()
