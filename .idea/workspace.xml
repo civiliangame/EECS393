@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tmallscraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="305" column="28" lean-forward="true" selection-start-line="305" selection-start-column="28" selection-end-line="305" selection-end-column="28" />
+            <state relative-caret-position="403">
+              <caret line="283" lean-forward="true" selection-start-line="283" selection-end-line="283" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -47,8 +47,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hre</find>
-      <find>href</find>
       <find>new_urls</find>
       <find>a-row stores-row stores-widget-btf</find>
       <find>available from</find>
@@ -62,7 +60,6 @@
       <find>username</find>
       <find>clicked</find>
       <find>eecs</find>
-      <find>print</find>
       <find>replace</find>
       <find>string</find>
       <find>text</find>
@@ -77,6 +74,9 @@
       <find>rel</find>
       <find>while</find>
       <find>price</find>
+      <find>selenium</find>
+      <find>purgeString</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace>apple</replace>
@@ -398,8 +398,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tmallscraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="305" column="28" lean-forward="true" selection-start-line="305" selection-start-column="28" selection-end-line="305" selection-end-column="28" />
+        <state relative-caret-position="403">
+          <caret line="283" lean-forward="true" selection-start-line="283" selection-end-line="283" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
