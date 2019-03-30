@@ -224,7 +224,20 @@ def applescraper():
     r = requests.get("https://apple.tmall.com/")
     print("loaded")
     soup = BeautifulSoup(r.content, "lxml")
-    
+    iphones = soup.find("a", string="iPhone")
+    print(iphones)
+    iphones_link = "https:" + iphones.get("href")
+
+
+    r = requests.get(iphones_link)
+    soup = BeautifulSoup(r.content, "lxml")
+    specific_iphones = []
+
+    for phonelink in soup.find_all("a", string="购买"):
+        url = str(phonelink.get("href"))
+        print(url)
+        specific_iphones.append(url)
+    return specific_iphones
 
 def specific_phones(link):
     r = requests.get(link)
@@ -260,8 +273,10 @@ def specific_phones(link):
 
 
 
+links = applescraper()\
 
-specific_phones("https://detail.tmall.com/item.htm?id=581727960031&scene=taobao_shop&sku_properties=10004:900640275;5919063:6536025")
+print(specific_phones(links[0]))
+#specific_phones("https://detail.tmall.com/item.htm?id=581727960031&scene=taobao_shop&sku_properties=10004:900640275;5919063:6536025")
 
 
 
