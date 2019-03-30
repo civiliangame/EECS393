@@ -118,12 +118,13 @@ def huaweiScraper():
     for outbox in soup.find_all("div", {"class": "outbox"}):
 
         if "navlist5" in str(outbox.find_parent()):
-            print(str(outbox.find_parent()))
+            #print(str(outbox.find_parent()))
             #print("outbox = " + str(outbox))
             for rel in outbox.find_all("div",{"class": "rel", "data-title" : "power by junezx 3.0"}):
                 for a in rel.find_all("a", {"target": "_blank", "data-linkmode" : "ptlink"}):
-                    print("link is " + a.get("href"))
-
+                    #print("link is " + a.get("href"))
+                    ptlinks.append("https:" + str(a.get("href")))
+    return ptlinks
     #print(ptlinks)
 
 
@@ -218,13 +219,49 @@ def samsungScraper2():
     print(phonelist)
     return phonelist
 
+def applescraper():
+    print("here we go")
+    r = requests.get("https://apple.tmall.com/")
+    print("loaded")
+    soup = BeautifulSoup(r.content, "lxml")
+    
 
-samsungScraper2()
+def specific_phones(link):
+    r = requests.get(link)
+    source_code = str(r.content)
+    shopsetup = source_code.find("TShop.Setup")
+
+    print("T shop starts from: " + str(shopsetup))
+    source_code = source_code[shopsetup:]
+    print("castrated")
+    priceList = []
+
+    notdeadyet = True
+    while notdeadyet == True:
+
+        priceIndex = source_code.find("\"price\":\"")
+
+        if priceIndex == -1:
+            notdeadyet = False
+        else:
+            source_code = source_code[priceIndex + 9:]
+            periodIndex = source_code.find(".")
+            priceList.append(int(source_code[:periodIndex]))
+    #print(priceList)
+    phoneprice = min(priceList)
+    print(phoneprice)
+
+    soup = BeautifulSoup(r.content, "lxml")
+    meta = soup.find("meta", {"name": "keywords"})
+    phonename = (meta.get("content"))
+    return[phonename, phoneprice]
+    #print(source_code)
 
 
 
 
 
+specific_phones("https://detail.tmall.com/item.htm?id=581727960031&scene=taobao_shop&sku_properties=10004:900640275;5919063:6536025")
 
 
 
