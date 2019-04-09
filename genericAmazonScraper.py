@@ -164,7 +164,7 @@ def find_product_details(link, driver, companyName):
 
     #Goes to the link
     driver.get(link)
-    time.sleep(.1)
+    time.sleep(1)
     #Take a quick break to make sure that amazon doesn't block us for being bots
     #And, most importantly, to allow javascript to load in the page
 

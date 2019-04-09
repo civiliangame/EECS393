@@ -8,4 +8,4 @@ pip install timeout_decorator
 pip install bs4
 pip install timeout_decorator
 pip install xlwt
-pip install webdriver_manager.chrome
+pip install webdriver_manager
